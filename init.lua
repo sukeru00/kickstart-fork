@@ -949,3 +949,44 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = 'C:/.vim/undodir'
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = 'yes'
+vim.opt.isfname:append '@-@'
+
+vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = '80'
+
+vim.g.mapleader = ' '
+
+vim.opt.foldmethod = 'manual'
+
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
+-- window size related
+vim.keymap.set('n', '<leader>wg', '30<C-w>>')
+vim.keymap.set('n', '<leader>wl', '30<C-w><')
