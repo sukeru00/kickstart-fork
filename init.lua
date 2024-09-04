@@ -831,6 +831,11 @@ require('lazy').setup({
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
+    -- opts = function()
+    --   return {
+    --     transparent = true,
+    --   }
+    -- end,
     init = function()
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
@@ -935,11 +940,29 @@ require('lazy').setup({
   { -- undo tree
     'mbbill/undotree',
   },
-
+  -- { -- style
+  --   'rose-pine/neovim',
+  -- },
   { -- style
-    'rose-pine/neovim',
+    'xiyaowong/transparent.nvim',
   },
-
+  {
+    'christoomey/vim-tmux-navigator',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+    },
+    keys = {
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
+    },
+  },
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --
@@ -1012,3 +1035,8 @@ vim.opt.spell = true
 -- window size related
 vim.keymap.set('n', '<leader>wg', '30<C-w>>')
 vim.keymap.set('n', '<leader>wl', '30<C-w><')
+
+vim.cmd [[
+  highlight Normal guibg=none
+  highlight NonText guibg=none
+]]
