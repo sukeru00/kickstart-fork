@@ -966,6 +966,7 @@ require('lazy').setup({
       lazy = '💤 ',
     },
   },
+  checker = { enable = false },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
@@ -1003,7 +1004,7 @@ vim.opt.colorcolumn = '80'
 
 vim.g.mapleader = ' '
 
-vim.opt.foldmethod = 'manual'
+vim.opt.foldmethod = 'indent'
 
 vim.opt.spelllang = 'en_us'
 vim.opt.spell = true
