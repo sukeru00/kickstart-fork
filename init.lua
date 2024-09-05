@@ -1009,7 +1009,7 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = 'C:/.vim/undodir'
+vim.opt.undodir = '/home/tmurakami/.vim/undodir'
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
@@ -1035,6 +1035,9 @@ vim.opt.spell = true
 -- window size related
 vim.keymap.set('n', '<leader>wg', '30<C-w>>')
 vim.keymap.set('n', '<leader>wl', '30<C-w><')
+
+-- undotree setting
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 vim.cmd [[
   highlight Normal guibg=none
