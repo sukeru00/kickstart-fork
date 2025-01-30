@@ -606,7 +606,7 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
+        clangd = { cmd = { 'clangd', '--clang-tidy', '--completion-style=detailed', "--clang-tidy-checks='*,-modernize-*'" } },
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
@@ -925,7 +925,7 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
@@ -940,6 +940,26 @@ require('lazy').setup({
 
   { -- undo tree
     'mbbill/undotree',
+  },
+  {
+    'danymat/neogen',
+    config = true,
+    -- Uncomment next line if you want to follow only stable versions
+    version = '*',
+    keys = {
+      {
+        '<leader>ng',
+        function()
+          local opts = { noremap = true, silent = true }
+          require('neogen').generate(opts)
+        end,
+        mode = '',
+        desc = '[N]eo[G]en',
+      },
+    },
+  },
+  {
+    'nvim-pack/nvim-spectre',
   },
   -- { -- style
   --   'rose-pine/neovim',
@@ -1003,9 +1023,16 @@ require('lazy').setup({
             name = 'Debug',
             request = 'launch',
             program = function()
-              return vim.fn.input('executable: ', vim.fn.getcwd() .. '/build/', 'file')
+              -- assign to a value to ensure this program clause runs before args clause
+              local executable = vim.fn.input('executable: ', vim.fn.getcwd() .. '/build/', 'file')
+              return executable
+            end,
+            args = function()
+              local args_string = vim.fn.input 'arguments: '
+              return vim.split(args_string, ' ')
             end,
             cwd = '${workspaceFolder}',
+            stopAtEntry = true,
           },
         },
       }
